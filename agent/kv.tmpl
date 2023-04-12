@@ -1,0 +1,22 @@
+{{ with secret "secret/data/nginx/front-page" -}}
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css"> 
+</head>
+<body>
+  <main>
+    <h4>Secret path: secret/data/nginx/front-page, Policy: nginx-agent-policy</h4>
+    <ul>
+      <li><strong>app:</strong> {{ .Data.data.app }}</li>
+      <li><strong>username:</strong> {{ .Data.data.username }}</li>
+      <li><strong>password:</strong> {{ .Data.data.password }}</li>
+    </ul>
+    <h4>Vault commands</h4>
+    <pre><code>
+      vault kv get secret/nginx/front-page
+      vault kv list secret/nginx
+      vault policy read nginx-agent-policy
+    </code></pre></div>
+  </main>
+</body></html>
+{{- end }}

@@ -1,0 +1,24 @@
+{{ with secret "postgres/creds/nginx" -}}
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css"> 
+</head>
+<body>
+  <main>
+    <h4>Secret path: postgres/creds/nginx, Policy: nginx-agent-policy</h4>
+    <ul>
+      <ul><li><strong>Connection String</strong>: postgresql://{{ .Data.username }}:{{ .Data.password }}@postgres:5432/products</li>
+      <li><strong>username:</strong> {{ .Data.username }}</li>
+      <li><strong>password:</strong> {{ .Data.password }}</li>
+    </ul>
+    <h4>Vault commands</h4>
+    <pre><code>
+      vault read postgres/creds/nginx
+      vault lease renew postgres/creds/nginx/lease_id
+      vault lease revoke postgres/creds/nginx/lease_id
+      vault policy read nginx-agent-policy
+    </code></pre></div>
+  </main>
+</body></html>
+{{- end }}
+
